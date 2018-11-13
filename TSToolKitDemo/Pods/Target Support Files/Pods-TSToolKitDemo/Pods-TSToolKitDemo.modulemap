@@ -1,0 +1,6 @@
+framework module Pods_TSToolKitDemo {
+  umbrella header "Pods-TSToolKitDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -15,6 +15,12 @@
 		6C7EBCA8219B1E2500B093BA /* TSToolKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBCA7219B1E2500B093BA /* TSToolKit_SwiftTests.swift */; };
 		6C7EBCB3219B1E2500B093BA /* TSToolKit_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBCB2219B1E2500B093BA /* TSToolKit_SwiftUITests.swift */; };
 		6C7EBCC2219B203A00B093BA /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBCC1219B203A00B093BA /* String+Util.swift */; };
+		6C7EBD00219B2EA100B093BA /* TSCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBCFF219B2EA100B093BA /* TSCommon.swift */; };
+		6C7EBD02219B31FD00B093BA /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBD01219B31FD00B093BA /* DateUtil.swift */; };
+		6C7EBD04219B350000B093BA /* UIColor+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBD03219B350000B093BA /* UIColor+Util.swift */; };
+		6C7EBD06219B3A8200B093BA /* TSAppStoreUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBD05219B3A8200B093BA /* TSAppStoreUtil.swift */; };
+		6C7EBD08219B3BDA00B093BA /* TSOpenUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBD07219B3BDA00B093BA /* TSOpenUrl.swift */; };
+		6C7EBD0A219B3E8300B093BA /* UIImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBD09219B3E8300B093BA /* UIImage+Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		6C7EBCB2219B1E2500B093BA /* TSToolKit_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSToolKit_SwiftUITests.swift; sourceTree = "<group>"; };
 		6C7EBCB4219B1E2500B093BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C7EBCC1219B203A00B093BA /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
+		6C7EBCFF219B2EA100B093BA /* TSCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSCommon.swift; sourceTree = "<group>"; };
+		6C7EBD01219B31FD00B093BA /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		6C7EBD03219B350000B093BA /* UIColor+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Util.swift"; sourceTree = "<group>"; };
+		6C7EBD05219B3A8200B093BA /* TSAppStoreUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSAppStoreUtil.swift; sourceTree = "<group>"; };
+		6C7EBD07219B3BDA00B093BA /* TSOpenUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSOpenUrl.swift; sourceTree = "<group>"; };
+		6C7EBD09219B3E8300B093BA /* UIImage+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Util.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +144,12 @@
 			isa = PBXGroup;
 			children = (
 				6C7EBCC1219B203A00B093BA /* String+Util.swift */,
+				6C7EBCFF219B2EA100B093BA /* TSCommon.swift */,
+				6C7EBD01219B31FD00B093BA /* DateUtil.swift */,
+				6C7EBD03219B350000B093BA /* UIColor+Util.swift */,
+				6C7EBD05219B3A8200B093BA /* TSAppStoreUtil.swift */,
+				6C7EBD07219B3BDA00B093BA /* TSOpenUrl.swift */,
+				6C7EBD09219B3E8300B093BA /* UIImage+Util.swift */,
 			);
 			name = Code;
 			path = ../../Code;
@@ -269,8 +287,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C7EBCC2219B203A00B093BA /* String+Util.swift in Sources */,
+				6C7EBD02219B31FD00B093BA /* DateUtil.swift in Sources */,
+				6C7EBD00219B2EA100B093BA /* TSCommon.swift in Sources */,
+				6C7EBD06219B3A8200B093BA /* TSAppStoreUtil.swift in Sources */,
 				6C7EBC95219B1E2300B093BA /* ViewController.swift in Sources */,
 				6C7EBC93219B1E2300B093BA /* AppDelegate.swift in Sources */,
+				6C7EBD08219B3BDA00B093BA /* TSOpenUrl.swift in Sources */,
+				6C7EBD04219B350000B093BA /* UIColor+Util.swift in Sources */,
+				6C7EBD0A219B3E8300B093BA /* UIImage+Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
