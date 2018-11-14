@@ -1,6 +1,6 @@
 # TSToolKit_Swift
 
-pod 'TSToolKit_Swift'
+pod 'TSToolKit_Swift',:git=>'https://github.com/StoneStoneStoneWang/TSToolKit_Swift.git'
 
 ## MXThenAction 
 ##then回调
