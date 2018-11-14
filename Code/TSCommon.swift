@@ -28,10 +28,10 @@ public let TS_TABBAR_HEIGHT: CGFloat = KISIPHONEX ? 34 + 49 : 49
 
 
 // MARK: printLog
-func printLog<T>(message: T,
-                 file: String = #file,
-                 method: String = #function,
-                 line: Int = #line)
+public func printLog<T>(message: T,
+                        file: String = #file,
+                        method: String = #function,
+                        line: Int = #line)
 {
     
     debugPrint("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message): \(Date.getTimeStamp_MS())")

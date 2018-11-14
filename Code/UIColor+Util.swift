@@ -21,25 +21,30 @@ public func TSHEXCOLOR(hexColor: String) -> UIColor {
     return UIColor.colorWithHexString(hexColor: hexColor)
 }
 
-extension UIColor {
+public func TSHEXCOLOR_ALPHA(hexColor: String) -> UIColor {
     
+    return UIColor.alpha_colorWithHexString(hexColor: hexColor)
+}
+
+extension UIColor {
+    // 传入参数0xffffff 、#ffffff、 ffffff
     fileprivate static func colorWithHexString(hexColor: String) -> UIColor {
         
         var cString: String = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
-        // String should be 6 or 8 characters
-        if cString.length() < 6 { return .clear }
+        // String should be 6 - 8 characters
+        if cString.count < 6 { return .clear }
         
         if cString.hasPrefix("0X") {
             
-            let index = cString.index(after: (cString.index(after: cString.startIndex)))
+            let index = cString.index(cString.startIndex, offsetBy: 2)
             
             cString = "\(cString[..<index])"
         }
         
         if cString.hasPrefix("#") { cString = String(cString[cString.index(after: cString.startIndex)...]) }
         
-        if cString.length() != 6 { return .clear }
+        if cString.length != 6 { return .clear }
         
         var range: NSRange = NSRange(location: 0, length: 2)
         
@@ -62,5 +67,52 @@ extension UIColor {
         Scanner(string: bString).scanInt(&b)
         
         return TSRGBColor(r: CGFloat(r), g: CGFloat(g), b: CGFloat(b))
+    }
+    // 要设置透明度 一般情况下透明度都是0.3所以在需要透明度的地方 传入参数如下 #ffffff30 0xffffff30
+    fileprivate static func alpha_colorWithHexString(hexColor: String) -> UIColor {
+        
+        var cString: String = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
+        
+        // String should be 8 - 10 characters
+        if cString.count < 8 { return .clear }
+        
+        if cString.hasPrefix("0X") {
+            
+            let index = cString.index(cString.startIndex, offsetBy: 2)
+            
+            cString = "\(cString[..<index])"
+        }
+        
+        if cString.hasPrefix("#") { cString = String(cString[cString.index(after: cString.startIndex)...]) }
+        
+        if cString.length != 8 { return .clear }
+        
+        var range: NSRange = NSRange(location: 0, length: 2)
+        
+        let rString = "\(cString[Range(range, in: cString)!])"
+        
+        range.location = 2
+        
+        let gString = "\(cString[Range(range, in: cString)!])"
+        
+        range.location = 4
+        
+        let bString = "\(cString[Range(range, in: cString)!])"
+        
+        range.location = 6
+        
+        let alphaString = "\(cString[Range(range, in: cString)!])"
+        
+        var r = 0 ,g = 0 ,b = 0 ,alpha = 0
+        
+        Scanner(string: rString).scanInt(&r)
+        
+        Scanner(string: gString).scanInt(&g)
+        
+        Scanner(string: bString).scanInt(&b)
+        
+        Scanner(string: alphaString).scanInt(&alpha)
+        
+        return TSRGBColor(r: CGFloat(r), g: CGFloat(g), b: CGFloat(b) ,alpha: CGFloat(alpha) / 100)
     }
 }

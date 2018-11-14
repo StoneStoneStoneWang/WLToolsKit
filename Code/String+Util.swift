@@ -10,10 +10,11 @@ import Foundation
 
 // MARK: 字符串长度 length
 extension String {
+    // 可以用 lengthOfBytes(using: ) 计算不同编码的长度 得到的是字节的数量 需要运算才能得到字符的数量
     
-    public func length() -> Int {
+    public var length: Int {
         
-        return lengthOfBytes(using: .utf8)
+        return count
     }
 }
 // MARK: validPhone
@@ -26,7 +27,7 @@ extension String {
             return false
         }
         
-        guard phone.length() == 11 ,phone.hasPrefix("1") else {
+        guard phone.length == 11 ,phone.hasPrefix("1") else {
             
             return false
         }
@@ -94,7 +95,6 @@ extension String {
 }
 
 // MARK: pinyin
-
 extension String {
     
     public func transformToPinYin() -> String {
@@ -115,3 +115,29 @@ extension String {
         return string.replacingOccurrences(of: " ", with: "")
     }
 }
+
+// MARK: 计算中文长度
+extension String {
+    // emoji 按照2个字符算
+    public func byteLength() -> Int {
+        
+        let le = count
+        // [一-龥]
+        let pattern = "[\u{4e00}-\u{9fa5}]"
+        //
+        do {
+            
+            let regex = try NSRegularExpression(pattern: pattern, options: [NSRegularExpression.Options.caseInsensitive])
+            
+            let matches = regex.numberOfMatches(in: self, options: NSRegularExpression.MatchingOptions.reportProgress, range: NSMakeRange(0, le))
+            
+            return matches
+        } catch  {
+            
+            fatalError(error.localizedDescription)
+        }
+    }
+    // 用 lengthOfBytes会出现越界的问题 我想要得到是字符的数量而不是字节的数量
+    // Terminating app due to uncaught exception 'NSRangeException', reason: '*** -[NSRegularExpression enumerateMatchesInString:options:range:usingBlock:]: Range or index out of bounds'
+}
+

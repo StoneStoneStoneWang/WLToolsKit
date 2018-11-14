@@ -32,3 +32,39 @@ extension UIImage {
         return img
     }
 }
+// MARK: viewTransformToImage
+extension UIImage {
+    // 转场的时候可能会用到 之后写转场动画的时候使用遇到问题在解决这个
+    public static func viewTransformToImage(view: UIView) -> UIImage? {
+        
+        UIGraphicsBeginImageContext(view.bounds.size)
+        
+        if view.responds(to: #selector(view.drawHierarchy(in:afterScreenUpdates:))) {
+            
+            view.drawHierarchy(in: view.bounds, afterScreenUpdates: false)
+        } else {
+            
+            view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        }
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    // 什么时候都能用
+    public static func viewTransformToImg(view: UIView) -> UIImage? {
+        
+        UIGraphicsBeginImageContext(view.bounds.size)
+        
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+}
