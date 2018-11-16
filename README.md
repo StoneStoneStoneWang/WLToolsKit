@@ -19,3 +19,6 @@ pod 'TSToolKit_Swift',:git=>'https://github.com/StoneStoneStoneWang/TSToolKit_Sw
 
 ## UIImage+Util
 ##颜色转图片 view转图片
+
+## Load+ Swizzling
+Swift 运行时 方法替换

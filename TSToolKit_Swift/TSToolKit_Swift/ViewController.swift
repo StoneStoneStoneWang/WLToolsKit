@@ -13,24 +13,76 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let a = UIButton(type: .custom)
+        let tf = UITextField()
         
-        view.addSubview(a)
+        tf.frame = CGRect(x: 0, y: 100, width: 300, height: 44)
         
-        a.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        tf.backgroundColor = .red
         
-        a.backgroundColor = TSHEXCOLOR(hexColor: "#000000")
+        view.addSubview(tf)
         
-        let b = UIButton(type: .custom)
+        tf.delegate = self
         
-        view.addSubview(b)
-        
-        b.frame = CGRect(x: 0, y: 200, width: 100, height: 100)
-        
-        b.backgroundColor = TSHEXCOLOR_ALPHA(hexColor: "#eeeeee20")
-        
-        printLog(message: CGFloat(20) / 100)
+        tf.addTarget(self, action: #selector(onEditChanged(_:)), for: .editingChanged)
     }
+    
+    @objc fileprivate func onEditChanged(_ tf: UITextField) {
+        
+//        var toBeString = tf.text!;
+//
+//        while toBeString.length > 10 {
+//
+//            toBeString = "\(toBeString[..<toBeString.index(before: toBeString.endIndex)])"
+//
+//            tf.text = toBeString;
+//        }
+        
+        let str: String = ""
+        
+        
+    }
+    
+    
 }
-
+extension ViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        printLog(message: textField.text?.fastestEncoding)
+        
+        printLog(message: string.fastestEncoding)
+        
+//        var toBeString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+//
+//        let charLen = toBeString.byteLength()
+//
+//        printLog(message: textField.text)
+//
+//        printLog(message: toBeString)
+//
+//        if charLen > 10 {
+//
+//            if string != "" {
+//
+//                if textField.text!.byteLength() != 10 {
+//
+//                    while toBeString.byteLength() > 10 {
+//
+//                        printLog(message: toBeString)
+//
+//                        toBeString = "\(toBeString[..<toBeString.index(before: toBeString.endIndex)])"
+//
+//                        printLog(message: toBeString)
+//
+//                        textField.text = toBeString
+//                    }
+//                }
+//                return false
+//            }
+//        }
+        
+        return true
+    }
+    
+}
 //Users/threestonewang/Desktop/新的仓库/TSToolKit_Swift/TSToolKit_Swift/TSToolKit_Swift/ViewController.swift:33:20: Generic parameter 'T' could not be inferred
