@@ -41,55 +41,55 @@ extension UIApplication {
         return super.next
     }
 }
-// MARK:
-extension UIViewController: SelfAware {
-    public static func awake() {
-        
-        UIViewController.classInit()
-    }
-    
-    private static func classInit() {
-        
-        viewDidLoad_swizzleMethod
-        
-        viewWillAppear_swizzleMethod
-    }
-    
-    @objc open func __ts_swizzled_viewWillAppear(_ animated: Bool) {
-        __ts_swizzled_viewWillAppear(animated)
-
-        
-    }
-    
-    @objc open func __ts_swizzled_viewDidLoad() {
-        __ts_swizzled_viewDidLoad()
-        
-    }
-    
-    private static let viewWillAppear_swizzleMethod: Void = {
-        let originalSelector = #selector(viewWillAppear(_:))
-        let swizzledSelector = #selector(__ts_swizzled_viewWillAppear(_:))
-        swizzlingForClass(UIViewController.self, originalSelector: originalSelector, swizzledSelector: swizzledSelector)
-    }()
-    
-    private static let viewDidLoad_swizzleMethod: Void = {
-        let originalSelector = #selector(viewDidLoad)
-        let swizzledSelector = #selector(__ts_swizzled_viewDidLoad)
-        swizzlingForClass(UIViewController.self, originalSelector: originalSelector, swizzledSelector: swizzledSelector)
-    }()
-    
-    private static func swizzlingForClass(_ forClass: AnyClass, originalSelector: Selector, swizzledSelector: Selector) {
-        let originalMethod = class_getInstanceMethod(forClass, originalSelector)
-        let swizzledMethod = class_getInstanceMethod(forClass, swizzledSelector)
-        
-        guard (originalMethod != nil && swizzledMethod != nil) else {
-            return
-        }
-        
-        if class_addMethod(forClass, originalSelector, method_getImplementation(swizzledMethod!), method_getTypeEncoding(swizzledMethod!)) {
-            class_replaceMethod(forClass, swizzledSelector, method_getImplementation(originalMethod!), method_getTypeEncoding(originalMethod!))
-        } else {
-            method_exchangeImplementations(originalMethod!, swizzledMethod!)
-        }
-    }
-}
+// MARK: 例子
+//extension UIViewController: SelfAware {
+//    public static func awake() {
+//
+//        UIViewController.classInit()
+//    }
+//
+//    private static func classInit() {
+//
+//        viewDidLoad_swizzleMethod
+//
+//        viewWillAppear_swizzleMethod
+//    }
+//
+//    @objc open func __ts_swizzled_viewWillAppear(_ animated: Bool) {
+//        __ts_swizzled_viewWillAppear(animated)
+//
+//
+//    }
+//
+//    @objc open func __ts_swizzled_viewDidLoad() {
+//        __ts_swizzled_viewDidLoad()
+//
+//    }
+//
+//    private static let viewWillAppear_swizzleMethod: Void = {
+//        let originalSelector = #selector(viewWillAppear(_:))
+//        let swizzledSelector = #selector(__ts_swizzled_viewWillAppear(_:))
+//        swizzlingForClass(UIViewController.self, originalSelector: originalSelector, swizzledSelector: swizzledSelector)
+//    }()
+//
+//    private static let viewDidLoad_swizzleMethod: Void = {
+//        let originalSelector = #selector(viewDidLoad)
+//        let swizzledSelector = #selector(__ts_swizzled_viewDidLoad)
+//        swizzlingForClass(UIViewController.self, originalSelector: originalSelector, swizzledSelector: swizzledSelector)
+//    }()
+//
+//    private static func swizzlingForClass(_ forClass: AnyClass, originalSelector: Selector, swizzledSelector: Selector) {
+//        let originalMethod = class_getInstanceMethod(forClass, originalSelector)
+//        let swizzledMethod = class_getInstanceMethod(forClass, swizzledSelector)
+//
+//        guard (originalMethod != nil && swizzledMethod != nil) else {
+//            return
+//        }
+//
+//        if class_addMethod(forClass, originalSelector, method_getImplementation(swizzledMethod!), method_getTypeEncoding(swizzledMethod!)) {
+//            class_replaceMethod(forClass, swizzledSelector, method_getImplementation(originalMethod!), method_getTypeEncoding(originalMethod!))
+//        } else {
+//            method_exchangeImplementations(originalMethod!, swizzledMethod!)
+//        }
+//    }
+//}
