@@ -41,7 +41,7 @@ extension UIApplication {
         return super.next
     }
 }
-
+// MARK:
 extension UIViewController: SelfAware {
     public static func awake() {
         
@@ -49,22 +49,23 @@ extension UIViewController: SelfAware {
     }
     
     private static func classInit() {
-        viewWillAppear_swizzleMethod
         
         viewDidLoad_swizzleMethod
+        
+        viewWillAppear_swizzleMethod
     }
     
-    @objc public func __ts_swizzled_viewWillAppear(_ animated: Bool) {
+    @objc open func __ts_swizzled_viewWillAppear(_ animated: Bool) {
         __ts_swizzled_viewWillAppear(animated)
+
         
-        
-        //        print("swizzled_viewWillAppear")
     }
     
-    @objc public func __ts_swizzled_viewDidLoad() {
+    @objc open func __ts_swizzled_viewDidLoad() {
         __ts_swizzled_viewDidLoad()
         
     }
+    
     private static let viewWillAppear_swizzleMethod: Void = {
         let originalSelector = #selector(viewWillAppear(_:))
         let swizzledSelector = #selector(__ts_swizzled_viewWillAppear(_:))

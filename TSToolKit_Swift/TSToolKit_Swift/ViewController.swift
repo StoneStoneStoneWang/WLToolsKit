@@ -37,7 +37,7 @@ class ViewController: UIViewController  {
 //            tf.text = toBeString;
 //        }
         
-        let str: String = ""
+//        let str: String = ""
         
         
     }

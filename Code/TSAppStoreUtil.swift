@@ -25,7 +25,7 @@ class TSAppStoreUtil: NSObject {
 // MARK: 注册appid
 extension TSAppStoreUtil {
     
-    public func regFor(appId: String) {
+    open func regFor(appId: String) {
         
         self.appId = appId
         
@@ -36,12 +36,12 @@ extension TSAppStoreUtil {
 }
 extension TSAppStoreUtil {
     
-    public func skipToAppStore() -> Bool {
+    open func skipToAppStore() -> Bool {
         
         return TSOpenUrl.openUrl(urlString: appStoreUrl)
     }
     
-    public func skipToEva() -> Bool {
+    open func skipToEva() -> Bool {
         
         return TSOpenUrl.openUrl(urlString: appStoreEvaUrl)
     }
