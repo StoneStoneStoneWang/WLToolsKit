@@ -17,7 +17,7 @@ class ViewController: UIViewController  {
         
         tf.frame = CGRect(x: 0, y: 100, width: 300, height: 44)
         
-        tf.backgroundColor = .red
+        tf.backgroundColor = TSHEXCOLOR_ALPHA(hexColor: "#eeeeee30")
         
         view.addSubview(tf)
         

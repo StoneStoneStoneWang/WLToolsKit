@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "TSToolKit_Swift"
-s.version      = "1.0.8"
+s.version      = "1.0.9"
 s.summary      = "A Lib For Tool."
 s.description  = <<-DESC
 TSToolKit_Swift是一个综合类的工具类。 字符串、颜色 图片等 Load+Swizzling

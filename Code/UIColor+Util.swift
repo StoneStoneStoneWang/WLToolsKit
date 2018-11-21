@@ -58,13 +58,13 @@ extension UIColor {
         
         let bString = "\(cString[Range(range, in: cString)!])"
         
-        var r = 0 ,g = 0 ,b = 0
+        var r: UInt32 = 0 ,g: UInt32 = 0 ,b: UInt32 = 0
         
-        Scanner(string: rString).scanInt(&r)
+        Scanner(string: rString).scanHexInt32(&r)
         
-        Scanner(string: gString).scanInt(&g)
+        Scanner(string: gString).scanHexInt32(&g)
         
-        Scanner(string: bString).scanInt(&b)
+        Scanner(string: bString).scanHexInt32(&b)
         
         return TSRGBColor(r: CGFloat(r), g: CGFloat(g), b: CGFloat(b))
     }
@@ -103,13 +103,13 @@ extension UIColor {
         
         let alphaString = "\(cString[Range(range, in: cString)!])"
         
-        var r = 0 ,g = 0 ,b = 0 ,alpha = 0
+        var r: UInt32 = 0 ,g: UInt32 = 0 ,b: UInt32 = 0,alpha = 0
         
-        Scanner(string: rString).scanInt(&r)
+        Scanner(string: rString).scanHexInt32(&r)
         
-        Scanner(string: gString).scanInt(&g)
+        Scanner(string: gString).scanHexInt32(&g)
         
-        Scanner(string: bString).scanInt(&b)
+        Scanner(string: bString).scanHexInt32(&b)
         
         Scanner(string: alphaString).scanInt(&alpha)
         
