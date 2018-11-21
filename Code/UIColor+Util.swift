@@ -28,7 +28,7 @@ public func TSHEXCOLOR_ALPHA(hexColor: String) -> UIColor {
 
 extension UIColor {
     // 传入参数0xffffff 、#ffffff、 ffffff
-    fileprivate static func colorWithHexString(hexColor: String) -> UIColor {
+    public static func colorWithHexString(hexColor: String) -> UIColor {
         
         var cString: String = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
@@ -69,7 +69,7 @@ extension UIColor {
         return TSRGBColor(r: CGFloat(r), g: CGFloat(g), b: CGFloat(b))
     }
     // 要设置透明度 一般情况下透明度都是0.3所以在需要透明度的地方 传入参数如下 #ffffff30 0xffffff30
-    fileprivate static func alpha_colorWithHexString(hexColor: String) -> UIColor {
+    public static func alpha_colorWithHexString(hexColor: String) -> UIColor {
         
         var cString: String = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
