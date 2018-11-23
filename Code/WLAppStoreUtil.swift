@@ -1,16 +1,16 @@
 //
-//  TSAppStoreUtil.swift
-//  TSToolKit_Swift
+//  WLAppStoreUtil.swift
+//  WLToolKit_Swift
 //
 //  Created by three stone 王 on 2018/11/14.
-//  Copyright © 2018年 three stone 王. All rights reserved.
+//  Copyright © 2018年 three stone 王. All righWL reserved.
 //
 
 import UIKit
 
-class TSAppStoreUtil: NSObject {
+class WLAppStoreUtil: NSObject {
     // MARK: 单例模式
-    public static var util: TSAppStoreUtil = TSAppStoreUtil()
+    public static var util: WLAppStoreUtil = WLAppStoreUtil()
     
     private override init() {
         
@@ -23,7 +23,7 @@ class TSAppStoreUtil: NSObject {
     fileprivate var appStoreEvaUrl: String = ""
 }
 // MARK: 注册appid
-extension TSAppStoreUtil {
+extension WLAppStoreUtil {
     
     open func regFor(appId: String) {
         
@@ -31,18 +31,18 @@ extension TSAppStoreUtil {
         
         self.appStoreUrl = "itms-apps://itunes.apple.com/app/\(appId)%@?mt=8"
         
-        self.appStoreEvaUrl = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(appId)&pageNumber=0&sortOrdering=2&mt=8"
+        self.appStoreEvaUrl = "itms-apps://itunes.apple.com/WebObjecWL/MZStore.woa/wa/viewContenWLUserReviews?type=Purple+Software&id=\(appId)&pageNumber=0&sortOrdering=2&mt=8"
     }
 }
-extension TSAppStoreUtil {
+extension WLAppStoreUtil {
     
     open func skipToAppStore() -> Bool {
         
-        return TSOpenUrl.openUrl(urlString: appStoreUrl)
+        return WLOpenUrl.openUrl(urlString: appStoreUrl)
     }
     
     open func skipToEva() -> Bool {
         
-        return TSOpenUrl.openUrl(urlString: appStoreEvaUrl)
+        return WLOpenUrl.openUrl(urlString: appStoreEvaUrl)
     }
 }

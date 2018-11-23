@@ -1,9 +1,9 @@
 //
-//  TSCommon.swift
-//  TSToolKit_Swift
+//  WLCommon.swift
+//  WLToolKit_Swift
 //
 //  Created by three stone 王 on 2018/11/14.
-//  Copyright © 2018年 three stone 王. All rights reserved.
+//  Copyright © 2018年 three stone 王. All righWL reserved.
 //
 
 import Foundation
@@ -12,19 +12,19 @@ import UIKit
 
 // MARK: Screen 相关
 
-public let TS_SCREEN_BOUNDS: CGRect = UIScreen.main.bounds
+public let WL_SCREEN_BOUNDS: CGRect = UIScreen.main.bounds
 
-public let TS_SCREEN_SIZE: CGSize = UIScreen.main.bounds.size
+public let WL_SCREEN_SIZE: CGSize = UIScreen.main.bounds.size
 
-public let TS_SCREEN_WIDTH: CGFloat = UIScreen.main.bounds.width
+public let WL_SCREEN_WIDTH: CGFloat = UIScreen.main.bounds.width
 
-public let TS_SCREEN_HEIGHT: CGFloat = UIScreen.main.bounds.height
+public let WL_SCREEN_HEIGHT: CGFloat = UIScreen.main.bounds.height
 
-public var KISIPHONEX: Bool = __CGSizeEqualToSize(CGSize(width: 375.0, height: 812.0), TS_SCREEN_SIZE) || __CGSizeEqualToSize(CGSize(width: 812.0, height: 375.0), TS_SCREEN_SIZE)
+public var KISIPHONEX: Bool = __CGSizeEqualToSize(CGSize(width: 375.0, height: 812.0), WL_SCREEN_SIZE) || __CGSizeEqualToSize(CGSize(width: 812.0, height: 375.0), WL_SCREEN_SIZE)
 
-public let TS_STATUSBAR_HEIGHT: CGFloat = KISIPHONEX ? 44 : 20
+public let WL_STATUSBAR_HEIGHT: CGFloat = KISIPHONEX ? 44 : 20
 
-public let TS_TABBAR_HEIGHT: CGFloat = KISIPHONEX ? 34 + 49 : 49
+public let WL_TABBAR_HEIGHT: CGFloat = KISIPHONEX ? 34 + 49 : 49
 
 
 // MARK: printLog

@@ -1,15 +1,15 @@
 //
-//  TSOpenUrl.swift
-//  TSToolKit_Swift
+//  WLOpenUrl.swift
+//  WLToolKit_Swift
 //
 //  Created by three stone 王 on 2018/11/14.
-//  Copyright © 2018年 three stone 王. All rights reserved.
+//  Copyright © 2018年 three stone 王. All righWL reserved.
 //
 
 import UIKit
 
 // MARK: openUrl
-class TSOpenUrl: NSObject {
+open class WLOpenUrl: NSObject {
     
     public static func openUrl(urlString: String) -> Bool {
         
@@ -22,7 +22,7 @@ class TSOpenUrl: NSObject {
 }
 
 // MARK: openSetting
-extension TSOpenUrl {
+extension WLOpenUrl {
     
     public static func openSetting() -> Bool {
         
