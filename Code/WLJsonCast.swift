@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WLJsonCast {
+open class WLJsonCast {
     
     // 必须是遵守了序列化的对象
     public static func cast<T>(argu: T) -> String {
