@@ -67,3 +67,20 @@ extension UIImage {
         return img
     }
 }
+
+extension UIImage {
+    // 字符串转图片
+    public static func stringTransformToImg(_ string: String ,_ attribute: [NSAttributedString.Key : Any],_ size: CGSize) -> UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        (string as NSString).draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height), withAttributes: attribute)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+}
