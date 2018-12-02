@@ -84,3 +84,24 @@ extension UIImage {
     }
     
 }
+// MARK: 截取图片的一部分
+extension UIImage {
+    
+    public static func wl_imageFromImage(_ image: UIImage ,inRect rect: CGRect) -> UIImage {
+        
+        let scale = UIScreen.main.scale
+        
+        let x = rect.origin.x * scale ,y = rect.origin.y * scale ,w = rect.width * scale ,h = rect.height * scale
+        
+        let dianRect = CGRect(x: x, y: y, width: w, height: h)
+        
+        let sourceImageRef: CGImage = image.cgImage!
+        
+        let newCGImage = sourceImageRef.cropping(to: dianRect)
+        
+        let newImage = UIImage(cgImage: newCGImage!, scale: scale, orientation: .up)
+        
+        return newImage
+    }
+}
+
