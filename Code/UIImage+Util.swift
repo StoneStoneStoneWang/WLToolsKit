@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // MARK: colorTransformToImage
-extension UIImage {
+public extension UIImage {
     
     public static func colorTransformToImage(color: UIColor) -> UIImage {
         
