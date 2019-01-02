@@ -140,4 +140,3 @@ extension String {
     // 用 lengthOfBytes会出现越界的问题 我想要得到是字符的数量而不是字节的数量
     // Terminating app due to uncaught exception 'NSRangeException', reason: '*** -[NSRegularExpression enumerateMatchesInString:options:range:usingBlock:]: Range or index out of bounds'
 }
-

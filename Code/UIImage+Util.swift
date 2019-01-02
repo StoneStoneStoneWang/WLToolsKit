@@ -187,12 +187,8 @@ extension UIImage {
             } else if data.count > maxLength {
                 
                 max = compression
-            } else {
-                
-                break
-            }
+            } else {  break }
         }
-        
         return data
     }
 }
