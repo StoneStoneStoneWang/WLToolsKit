@@ -10,7 +10,7 @@ import UIKit
 
 open class WLAppStoreUtil: NSObject {
     // MARK: 单例模式
-    public static var util: WLAppStoreUtil = WLAppStoreUtil()
+    public static let util: WLAppStoreUtil = WLAppStoreUtil()
     
     private override init() { }
     

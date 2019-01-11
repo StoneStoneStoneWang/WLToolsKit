@@ -40,6 +40,7 @@ extension UIApplication {
         UIApplication.runOnce
         return super.next
     }
+    
 }
 // MARK: 例子
 //extension UIViewController: SelfAware {

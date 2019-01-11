@@ -7,6 +7,14 @@
 //
 
 import Foundation
+// MARK: 去除空格和换行之后是否为空
+extension String {
+    
+    public var wl_isEmpty: Bool {
+        
+        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
+    }
+}
 
 // MARK: 字符串长度 length
 extension String {
