@@ -8,39 +8,14 @@
 
 import UIKit
 
-open class WLAppStoreUtil: NSObject {
-    // MARK: 单例模式
-    public static let util: WLAppStoreUtil = WLAppStoreUtil()
+public struct WLAppStoreUtil {
     
-    private override init() { }
-    
-    fileprivate var appId: String = ""
-    
-    fileprivate var appStoreUrl: String = ""
-    
-    fileprivate var appStoreEvaUrl: String = ""
-}
-// MARK: 注册appid
-extension WLAppStoreUtil {
-    
-    open func regFor(appId: String) {
+    public static func skipToAppStore(_ appId: String) {
         
-        self.appId = appId
-        
-        self.appStoreUrl = "itms-apps://itunes.apple.com/app/\(appId)%@?mt=8"
-        
-        self.appStoreEvaUrl = "itms-apps://itunes.apple.com/WebObjecWL/MZStore.woa/wa/viewContenWLUserReviews?type=Purple+Software&id=\(appId)&pageNumber=0&sortOrdering=2&mt=8"
+        WLOpenUrl.openUrl(urlString: "itms-apps://itunes.apple.com/app/id\(appId)?mt=8")
     }
-}
-extension WLAppStoreUtil {
-    
-    open func skipToAppStore() -> Bool {
+    public static func skipToEva(_ appId: String) {
         
-        return WLOpenUrl.openUrl(urlString: appStoreUrl)
-    }
-    
-    open func skipToEva() -> Bool {
-        
-        return WLOpenUrl.openUrl(urlString: appStoreEvaUrl)
+        WLOpenUrl.openUrl(urlString: "itms-apps://itunes.apple.com/WebObjecWL/MZStore.woa/wa/viewContenWLUserReviews?type=Purple+Software&id=\(appId)&pageNumber=0&sortOrdering=2&mt=8")
     }
 }

@@ -11,27 +11,37 @@ import UIKit
 // MARK: openUrl
 open class WLOpenUrl: NSObject {
     
-    public static func openUrl(urlString: String) -> Bool {
+    public static func openUrl(urlString: String) {
         
         if let url = URL(string: urlString) {
             
-            return UIApplication.shared.openURL(url)
+            if #available(iOS 10.0, *) {
+                // iOS 8 及其以上系统运行
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                
+                UIApplication.shared.openURL(url)
+            }
         }
-        return false
     }
 }
 
 // MARK: openSetting
 extension WLOpenUrl {
     
-    public static func openSetting() -> Bool {
+    public static func openSetting() {
         
         let settingUrl = URL(string: UIApplication.openSettingsURLString)
         
         if let url = settingUrl, UIApplication.shared.canOpenURL(url) {
             
-            return UIApplication.shared.openURL(url)
+            if #available(iOS 10.0, *) {
+                // iOS 8 及其以上系统运行
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                
+                UIApplication.shared.openURL(url)
+            }
         }
-        return false
     }
 }

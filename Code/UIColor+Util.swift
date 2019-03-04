@@ -26,7 +26,7 @@ public func WLHEXCOLOR_ALPHA(hexColor: String) -> UIColor {
     return UIColor.alpha_colorWithHexString(hexColor: hexColor)
 }
 
-extension UIColor {
+public extension UIColor {
     // 传入参数0xffffff 、#ffffff、 ffffff
     public static func colorWithHexString(hexColor: String) -> UIColor {
         
