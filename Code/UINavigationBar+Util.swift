@@ -14,6 +14,8 @@ public extension UINavigationBar {
         
         let view = UIView(frame: bounds)
         
+        view.backgroundColor = color
+        
         setValue(view, forKey: "backgroundView")
     }
 }
