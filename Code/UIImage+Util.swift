@@ -12,7 +12,7 @@ import UIKit
 // MARK: colorTransformToImage
 public extension UIImage {
     
-    public static func colorTransformToImage(color: UIColor) -> UIImage {
+    @objc public static func colorTransformToImage(color: UIColor) -> UIImage {
         
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         
@@ -34,16 +34,17 @@ public extension UIImage {
 // MARK: viewTransformToImage
 extension UIImage {
     // 转场的时候可能会用到 之后写转场动画的时候使用遇到问题在解决这个
-    public static func viewTransformToImage(view: UIView) -> UIImage? {
+    @objc public static func viewTransformToImage(view: UIView) -> UIImage? {
         
         UIGraphicsBeginImageContext(view.bounds.size)
         
-        if view.responds(to: #selector(view.drawHierarchy(in:afterScreenUpdates:))) {
+        if view.responds(to: #selector(view.drawHierarchy(in:afterScreenUpdates:))) { view.drawHierarchy(in: view.bounds, afterScreenUpdates: false) }
             
-            view.drawHierarchy(in: view.bounds, afterScreenUpdates: false)
-        } else {
+        else {
+            guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
             
-            view.layer.render(in: UIGraphicsGetCurrentContext()!)
+            view.layer.render(in: ctx)
+            
         }
         
         let img = UIGraphicsGetImageFromCurrentImageContext()
@@ -54,7 +55,7 @@ extension UIImage {
     }
     
     // 什么时候都能用
-    public static func viewTransformToImg(view: UIView) -> UIImage? {
+    @objc public static func viewTransformToImg(view: UIView) -> UIImage? {
         
         UIGraphicsBeginImageContext(view.bounds.size)
         
@@ -70,7 +71,7 @@ extension UIImage {
 
 extension UIImage {
     // 字符串转图片
-    public static func stringTransformToImg(_ string: String ,_ attribute: [NSAttributedString.Key : Any],_ size: CGSize) -> UIImage? {
+    @objc public static func stringTransformToImg(_ string: String ,_ attribute: [NSAttributedString.Key : Any],_ size: CGSize) -> UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         
@@ -87,7 +88,7 @@ extension UIImage {
 // MARK: 截取图片的一部分
 extension UIImage {
     
-    public static func wl_imageFromImage(_ image: UIImage ,inRect rect: CGRect) -> UIImage {
+    @objc public static func wl_imageFromImage(_ image: UIImage ,inRect rect: CGRect) -> UIImage {
         
         let scale = UIScreen.main.scale
         
@@ -95,7 +96,7 @@ extension UIImage {
         
         let dianRect = CGRect(x: x, y: y, width: w, height: h)
         
-        let sourceImageRef: CGImage = image.cgImage!
+        guard let sourceImageRef: CGImage = image.cgImage else { fatalError("cgimage 为空 ")}
         
         let newCGImage = sourceImageRef.cropping(to: dianRect)
         
@@ -108,7 +109,7 @@ extension UIImage {
 extension UIImage {
     
     // MARK: 存入图片
-    public static func wl_imagePath(image: UIImage,imageName: String) -> String {
+    @objc public static func wl_imagePath(image: UIImage,imageName: String) -> String {
         
         let data = image.jpegData(compressionQuality: 1)
         
@@ -126,7 +127,7 @@ extension UIImage {
     }
     
     // MARK: 存入图片
-    public static func wl_imagePath(data: Data,imageName: String) -> String {
+    @objc public static func wl_imagePath(data: Data,imageName: String) -> String {
         
         let documentsPath = (NSHomeDirectory() as NSString).appendingPathComponent("Documents")
         
@@ -142,7 +143,7 @@ extension UIImage {
     }
     
     // MARK: 移除图片
-    public static func wl_removeImageAtPath(imageName: String) {
+    @objc public static func wl_removeImageAtPath(imageName: String) {
         let documentsPath = (NSHomeDirectory() as NSString).appendingPathComponent("Documents")
         
         let fm = FileManager.default
@@ -164,7 +165,7 @@ extension UIImage {
 extension UIImage {
     
     // MARK: 二分法 压缩图片
-    public static func compressImage(_ image: UIImage ,maxLength: NSInteger) -> Data {
+    @objc public static func compressImage(_ image: UIImage ,maxLength: NSInteger) -> Data {
         
         var compression: CGFloat = 1
         
@@ -182,16 +183,10 @@ extension UIImage {
             
             data = image.jpegData(compressionQuality: compression)!
             
-            if data.count < NSInteger(Double(maxLength) * 0.9) {
-                
-                min = compression
-            } else if data.count > maxLength {
-                
-                max = compression
-            } else {  break }
+            if data.count < NSInteger(Double(maxLength) * 0.9) { min = compression }
+            else if data.count > maxLength { max = compression }
+            else {  break }
         }
         return data
     }
 }
-
-

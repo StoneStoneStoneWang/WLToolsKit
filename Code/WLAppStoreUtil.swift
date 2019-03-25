@@ -8,13 +8,13 @@
 
 import UIKit
 
-public struct WLAppStoreUtil {
+public class WLAppStoreUtil: NSObject {
     
-    public static func skipToAppStore(_ appId: String) {
+    @objc public static func skipToAppStore(_ appId: String) {
         
         WLOpenUrl.openUrl(urlString: "itms-apps://itunes.apple.com/app/id\(appId)?mt=8")
     }
-    public static func skipToEva(_ appId: String) {
+    @objc public static func skipToEva(_ appId: String) {
         
         WLOpenUrl.openUrl(urlString: "itms-apps://itunes.apple.com/WebObjecWL/MZStore.woa/wa/viewContenWLUserReviews?type=Purple+Software&id=\(appId)&pageNumber=0&sortOrdering=2&mt=8")
     }
