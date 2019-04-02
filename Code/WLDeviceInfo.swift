@@ -21,36 +21,38 @@ public let WL_SCREEN_NATIVE_HEIGHT: CGFloat = UIScreen.main.nativeBounds.height
 public struct WLDeviceInfo {
     
     // MARK: screen size
-    public static func s_device_screenSize() -> String { return String(format: "%.0f*%.0f", WL_SCREEN_WIDTH,WL_SCREEN_HEIGHT) }
+    public static func wl_device_screenSize() -> String { return String(format: "%.0f*%.0f", WL_SCREEN_WIDTH,WL_SCREEN_HEIGHT) }
     // MARK: native size
-    public static func s_device_nativeSize() -> String { return String(format: "%.0f*%.0f", WL_SCREEN_NATIVE_WIDTH,WL_SCREEN_NATIVE_HEIGHT) }
+    public static func wl_device_nativeSize() -> String { return String(format: "%.0f*%.0f", WL_SCREEN_NATIVE_WIDTH,WL_SCREEN_NATIVE_HEIGHT) }
     // MARK: 磁盘总大小
-    public static func s_device_TotalDiskSize() -> String { return "\(UIDevice.current.TotalDiskSize)" }
+    public static func wl_device_TotalDiskSize() -> String { return "\(UIDevice.current.TotalDiskSize)" }
     // MARK: 磁盘可用大小
-    public static func s_device_AvailableDiskSize() -> String { return "\(UIDevice.current.TotalDiskSize)" }
+    public static func wl_device_AvailableDiskSize() -> String { return "\(UIDevice.current.TotalDiskSize)" }
     // MARK: 是否有sim卡
-    public static func s_device_hasSIM() -> Bool { return s_device_has_sim_use }
+    public static func wl_device_hasSIM() -> Bool { return wl_device_hawl_sim_use }
     // MARK: 运营商: 0未知，1移动，2联通，3电信
-    public static func s_device_carrier_operator() -> String {
+    public static func wl_device_carrier_operator() -> String {
         
-        let result = s_device_carrier().map { $0.mobileNetworkCode }
+        let result = wl_device_carrier().map { $0.mobileNetworkCode }
         
-        var oper: SCarrierOperator = .UNKNOWN
+        var oper: WLCarrierOperator = .UNKNOWN
         
         for item in result {
             
             if let item = item {
                 
-                oper = SCarrierOperator(temp: item)
+                oper = WLCarrierOperator(temp: item)
             }
         }
         
         return oper.rawValue
     }
+    
+    
     // MARK: 设备型号:iPhone 9,1
-    public static func s_device_deviceModel() -> String { return z_device_deviceModel() }
+    public static func wl_device_deviceModel() -> String { return z_device_deviceModel() }
     // MARK: 电池状态 0:未知，1:未充电，2:正在充电,3:电池已充满
-    public static func s_device_batteryState() -> Int {
+    public static func wl_device_batteryState() -> Int {
         
         UIDevice.current.isBatteryMonitoringEnabled = true
         
@@ -58,7 +60,7 @@ public struct WLDeviceInfo {
     }
     // MARK: 0未知，1没有，2TouchID，3FaceID
     // TODO: .... 这个之后处理 可能用到指纹登录
-    public static func s_device_biometryType() -> Int {
+    public static func wl_device_biometryType() -> Int {
         
         let c = LAContext()
         
@@ -69,7 +71,7 @@ public struct WLDeviceInfo {
         else { return 0 }
     }
     // MARK: 代理检测
-    public static func s_device_hasProxy() -> Bool {
+    public static func wl_device_hasProxy() -> Bool {
         
         guard let proxySettings = CFNetworkCopySystemProxySettings() else { return false }
         
@@ -97,7 +99,7 @@ public struct WLDeviceInfo {
     }
     
     // MARK: vpn检测
-    public static func s_device_hasVPN() -> Bool {
+    public static func wl_device_hasVPN() -> Bool {
         
         var result: Bool = false
         
@@ -122,12 +124,12 @@ public struct WLDeviceInfo {
     }
     
     // MARK: 设备版本号
-    public static func s_device_version() -> String {
+    public static func wl_device_version() -> String {
         
         return UIDevice.current.systemVersion
     }
     // MARK: 剪切板
-    public static func s_device_pasteboard() -> String {
+    public static func wl_device_pasteboard() -> String {
         
         guard let pb = UIPasteboard.general.string else { return "" }
         
@@ -136,7 +138,7 @@ public struct WLDeviceInfo {
         return pb
     }
     // MARK: 剪切板
-    public static func s_device_pasteboard4len(_ len: Int) -> String {
+    public static func wl_device_pasteboard4len(_ len: Int) -> String {
         
         guard let pb = UIPasteboard.general.string else { return "" }
         
@@ -147,12 +149,12 @@ public struct WLDeviceInfo {
         return pb
     }
     // MARK: 开机时间:单位s
-    public static func s_device_systemUptime() -> String {
+    public static func wl_device_systemUptime() -> String {
         
         return ProcessInfo.processInfo.systemUptime.format("0")
     }
     // MARK: wifi名
-    public static func s_device_ssid() -> String {
+    public static func wl_device_ssid() -> String {
         
         guard let interfaces = CNCopySupportedInterfaces() else { return "" }
         
@@ -168,7 +170,7 @@ public struct WLDeviceInfo {
         
         return wifi as! String
     }
-    public static func s_device_bssid() -> String {
+    public static func wl_device_bssid() -> String {
         
         guard let interfaces = CNCopySupportedInterfaces() else { return "" }
         
@@ -184,11 +186,45 @@ public struct WLDeviceInfo {
         
         return macIp as! String
     }
+    
+    public static func wl_ip_Address() -> String {
+        
+        #if arch(i386) || arch(x86_64)
+        
+        return "0.0.0.0"
+        #else
+        
+        var addresses = [String]()
+        var ifaddr : UnsafeMutablePointer<ifaddrs>? = nil
+        if getifaddrs(&ifaddr) == 0 {
+            var ptr = ifaddr
+            while (ptr != nil) {
+                let flags = Int32(ptr!.pointee.ifa_flags)
+                var addr = ptr!.pointee.ifa_addr.pointee
+                if (flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING) {
+                    if addr.sa_family == UInt8(AF_INET) || addr.sa_family == UInt8(AF_INET6) {
+                        var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                        if (getnameinfo(&addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),nil, socklen_t(0), NI_NUMERICHOST) == 0) {
+                            if let address = String(validatingUTF8:hostname) {
+                                addresses.append(address)
+                            }
+                        }
+                    }
+                }
+                ptr = ptr!.pointee.ifa_next
+            }
+            freeifaddrs(ifaddr)
+        }
+        return addresses.first ?? "0.0.0.0"
+        #endif
+        
+        
+    }
 }
 
 extension WLDeviceInfo {
     
-    public enum SCarrierOperator: String {
+    public enum WLCarrierOperator: String {
         
         case LTE = "1"
         
@@ -241,13 +277,13 @@ private extension UIDevice{
     }
 }
 // MARK: 含有两个sim卡
-public let s_device_sim_1: String = "0000000100000001"
+public let wl_device_sim_1: String = "0000000100000001"
 
-public let s_device_sim_2: String = "0000000100000001"
+public let wl_device_sim_2: String = "0000000100000001"
 
-public var s_device_has_sim_use: Bool {
+public var wl_device_hawl_sim_use: Bool {
     
-    let result = s_device_carrier().map { $0.mobileNetworkCode }.map { $0 != nil }
+    let result = wl_device_carrier().map { $0.mobileNetworkCode }.map { $0 != nil }
     
     var flag: Bool = false
     
@@ -258,7 +294,7 @@ public var s_device_has_sim_use: Bool {
     
     return flag
 }
-private func s_device_carrier() -> Array<CTCarrier> {
+private func wl_device_carrier() -> Array<CTCarrier> {
     
     let networkInfo = CTTelephonyNetworkInfo()
     
@@ -275,7 +311,7 @@ private func s_device_carrier() -> Array<CTCarrier> {
     }
 }
 
-public var s_device_isSimulator: Bool {
+public var wl_device_isSimulator: Bool {
     
     return !z_device_deviceModel().hasPrefix("iPhone") && !z_device_deviceModel().hasPrefix("iPad")
 }
