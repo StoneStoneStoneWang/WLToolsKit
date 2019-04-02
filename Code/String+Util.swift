@@ -159,3 +159,14 @@ extension String {
         }
     }
 }
+extension String {
+    
+    public func transformToPinyin() -> String {
+        
+        let stringRef = NSMutableString(string: self) as CFMutableString
+        CFStringTransform(stringRef,nil, kCFStringTransformToLatin, false) // 转换为带音标的拼音
+        CFStringTransform(stringRef, nil, kCFStringTransformStripCombiningMarks, false) // 去掉音标
+        let pinyin = stringRef as String
+        return pinyin.replacingOccurrences(of: " ", with: "")
+    }
+}
