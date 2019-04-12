@@ -8,9 +8,10 @@
 
 import UIKit
 
-public extension UINavigationBar {
-    
-    @objc public func wl_setBackgroundColor(_ color: UIColor) {
+
+extension UINavigationBar {
+    @objc (wl_setBackgroundColorWithColor:)
+    public func wl_setBackgroundColor(_ color: UIColor) {
         
         let view = UIView(frame: bounds)
         

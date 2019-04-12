@@ -10,9 +10,50 @@ import Foundation
 import UIKit
 
 // MARK: colorTransformToImage
-public extension UIImage {
+
+extension UIImage {
     
-    @objc public static func colorTransformToImage(color: UIColor) -> UIImage {
+    @objc (colorAlphaHexTransformToImageWithColorAlphaHex:)
+    public static func colorAlphaHexTransformToImage(colorAlphaHex: String) -> UIImage {
+        
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        
+        UIGraphicsBeginImageContext(rect.size)
+        
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        
+        context.setFillColor(WLHEXCOLOR_ALPHA(hexColor: colorAlphaHex).cgColor)
+        
+        context.fill(rect)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    @objc (colorHexTransformToImageWithColorHex:)
+    public static func colorHexTransformToImage(colorHex: String) -> UIImage {
+        
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        
+        UIGraphicsBeginImageContext(rect.size)
+        
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        
+        context.setFillColor(WLHEXCOLOR(hexColor: colorHex).cgColor)
+        
+        context.fill(rect)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    @objc (colorTransformToImageWithColor:)
+    public static func colorTransformToImage(color: UIColor) -> UIImage {
         
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         
@@ -34,7 +75,9 @@ public extension UIImage {
 // MARK: viewTransformToImage
 extension UIImage {
     // 转场的时候可能会用到 之后写转场动画的时候使用遇到问题在解决这个
-    @objc public static func viewTransformToImage(view: UIView) -> UIImage? {
+    
+    @objc(viewTransformToImageWithView:)
+    public static func viewTransformToImage(view: UIView) -> UIImage? {
         
         UIGraphicsBeginImageContext(view.bounds.size)
         
@@ -71,7 +114,8 @@ extension UIImage {
 
 extension UIImage {
     // 字符串转图片
-    @objc public static func stringTransformToImg(_ string: String ,_ attribute: [NSAttributedString.Key : Any],_ size: CGSize) -> UIImage? {
+    @objc (stringTransformToImgWithStr:andAttribute:andSize:)
+    public static func stringTransformToImg(_ string: String , attribute: [NSAttributedString.Key : Any], size: CGSize) -> UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         
@@ -165,7 +209,8 @@ extension UIImage {
 extension UIImage {
     
     // MARK: 二分法 压缩图片
-    @objc public static func compressImage(_ image: UIImage ,maxLength: NSInteger) -> Data {
+    @objc (compressImageWithImage:andMaxLength:)
+    public static func compressImage(_ image: UIImage ,maxLength: NSInteger) -> Data {
         
         var compression: CGFloat = 1
         

@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import UIKit
+
 // MARK: 去除空格和换行之后是否为空
 
 extension NSString {
+    @objc (wl_isEmpty)
+    public var wl_isEmpty: Bool { return trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     
-    @objc public var wl_isEmpty: Bool {
-        
-        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
-    }
-    @objc public static func validPhone(phone: String) -> Bool {
+    @objc (validPhoneWithPhone:)
+    public static func validPhone(phone: String) -> Bool {
         
         guard !phone.isEmpty else {  return false }
         
@@ -23,8 +24,8 @@ extension NSString {
         
         return true
     }
-    
-    @objc public static func validEmail(email: String) -> Bool {
+    @objc (validEmailWithEmail:)
+    public static func validEmail(email: String) -> Bool {
         
         guard !email.isEmpty else { return false }
         
@@ -39,13 +40,45 @@ extension NSString {
         
         return emailPredicate.evaluate(with:self)
     }
+    @objc (firstLetter)
+    public func firstLetter() -> String { return (self as String).firstLetter() }
+    
+    @objc (transformToPinyin)
+    public func transformToPinyin() -> String { return (self as String).transformToPinYin() }
+    
+    @objc (caculateHeightWithSize:andFontSize:andLineSpace:)
+    public func caculateHeight(_ size: CGSize,fontSize: CGFloat ,lineSpace: CGFloat = 1) -> CGFloat {
+        
+        let style = NSMutableParagraphStyle()
+        
+        style.lineSpacing = lineSpace
+        
+        let h = boundingRect(with: size, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)], context: nil).size.height
+        
+        return h
+    }
+    @objc (caculateWidthWithSize:andFontSize:andLineSpace:)
+    public func caculateWidth(_ size: CGSize,fontSize: CGFloat ,lineSpace: CGFloat = 1) -> CGFloat {
+        
+        let style = NSMutableParagraphStyle()
+        
+        style.lineSpacing = lineSpace
+        
+        let h = boundingRect(with: size, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)], context: nil).size.width
+        
+        return h
+    }
+    
+    @objc (converToDateS1)
+    public func converToDateS1() -> String { return (self as String).converToDateS1() }
+    @objc (converToDateS2)
+    public func converToDateS2() -> String { return (self as String).converToDateS2() }
+    @objc (converToDateS3)
+    public func converToDateS3() -> String { return (self as String).converToDateS3() }
 }
 extension String {
     
-    public var wl_isEmpty: Bool {
-        
-        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
-    }
+    public var wl_isEmpty: Bool { return trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
 }
 
 // MARK: 字符串长度 length
@@ -168,5 +201,74 @@ extension String {
         CFStringTransform(stringRef, nil, kCFStringTransformStripCombiningMarks, false) // 去掉音标
         let pinyin = stringRef as String
         return pinyin.replacingOccurrences(of: " ", with: "")
+    }
+}
+// MARK: 计算 宽度 高度
+extension String {
+    
+    public func caculateHeight(_ size: CGSize,fontSize: CGFloat ,lineSpace: CGFloat = 1) -> CGFloat { return (self as NSString).caculateHeight(size, fontSize: fontSize, lineSpace: lineSpace) }
+    
+    public func caculateWidth(_ size: CGSize,fontSize: CGFloat ,lineSpace: CGFloat = 1) -> CGFloat { return (self as NSString).caculateWidth(size, fontSize: fontSize, lineSpace: lineSpace) }
+}
+// MARK: 计算日期
+extension String {
+    
+    public func converToDateS1() -> String {
+        
+        let df = DateFormatter()
+        
+        df.dateFormat = "MM.dd HH:mm"
+        
+        let interval = Double(self) ?? 0
+        
+        let date = Date(timeIntervalSince1970: interval)
+        
+        return df.string(from: date)
+    }
+    public func converToDateS2() -> String {
+        
+        let df = DateFormatter()
+        
+        df.dateFormat = "yyyy-MM-dd hh:mm"
+        
+        let interval = Double(self) ?? 0
+        
+        let date = Date(timeIntervalSince1970: interval)
+        
+        return df.string(from: date)
+    }
+    public func converToDateS3() -> String {
+        
+        let df = DateFormatter()
+        
+        let interval = Double(self) ?? 0
+        
+        let current = Date().timeIntervalSince1970
+        
+        let time = current - interval
+        
+        let seconds: Int = Int(time)
+        
+        if seconds < 60 {
+            return "\(seconds)秒前"
+        }
+        
+        let minutes: Int = Int(time) / 60
+        
+        if minutes < 60 {
+            return "\(minutes)分钟前"
+        }
+        
+        let hours: Int = Int(time) / 3600
+        
+        if hours < 24 {
+            return "\(hours)小时前"
+        }
+        
+        df.dateFormat = "yyyy-MM-dd hh:mm"
+        
+        let date = Date(timeIntervalSince1970: interval)
+        
+        return df.string(from: date)
     }
 }

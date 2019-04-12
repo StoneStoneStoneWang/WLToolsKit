@@ -9,9 +9,9 @@
 import UIKit
 
 // MARK: openUrl
-@objc public class WLOpenUrl: NSObject {
-    
-    @objc public static func openUrl(urlString: String) {
+@objc public final class WLOpenUrl: NSObject {
+    @objc (openUrlWithUrl:)
+    public static func openUrl(urlString: String) {
         
         if let url = URL(string: urlString) {
             
@@ -28,8 +28,8 @@ import UIKit
 
 // MARK: openSetting
 extension WLOpenUrl {
-    
-    @objc public static func openSetting() {
+    @objc (openSetting)
+    public static func openSetting() {
         
         let settingUrl = URL(string: UIApplication.openSettingsURLString)
         

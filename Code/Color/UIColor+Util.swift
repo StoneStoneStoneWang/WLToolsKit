@@ -26,9 +26,11 @@ public func WLHEXCOLOR_ALPHA(hexColor: String) -> UIColor {
     return UIColor.alpha_colorWithHexString(hexColor: hexColor)
 }
 
-public extension UIColor {
+extension UIColor {
     // 传入参数0xffffff 、#ffffff、 ffffff
-    @objc public static func colorWithHexString(hexColor: String) -> UIColor {
+    
+    @objc (colorWithHexString:)
+    public static func colorWithHexString(hexColor: String) -> UIColor {
         
         var cString: String = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
@@ -69,7 +71,9 @@ public extension UIColor {
         return WLRGBColor(r: CGFloat(r), g: CGFloat(g), b: CGFloat(b))
     }
     // 要设置透明度 一般情况下透明度都是0.3所以在需要透明度的地方 传入参数如下 #ffffff30 0xffffff30
-    @objc public static func alpha_colorWithHexString(hexColor: String) -> UIColor {
+    
+    @objc (alpha_colorWithHexString:)
+    public static func alpha_colorWithHexString(hexColor: String) -> UIColor {
         
         var cString: String = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         
