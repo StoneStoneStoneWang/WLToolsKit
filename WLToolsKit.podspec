@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "WLToolsKit"
-  spec.version      = "1.3.0"
+  spec.version      = "1.3.1"
   spec.summary      = "A Lib For Tool."
   spec.description  = <<-DESC
   WLToolKit是一个综合类的工具类。 字符串、颜色 图片等 Load+Swizzling
@@ -20,69 +20,64 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/WLToolsKit.git", :tag => "#{spec.version}" }
   
-  spec.subspec 'WLString' do |str|
+  spec.subspec 'String' do |str|
     
     str.source_files = "Code/String/*.{swift}"
     
   end
-  spec.subspec 'WLCommon' do |common|
+  spec.subspec 'Common' do |common|
     
     common.source_files = "Code/Common/*.{swift}"
     
-    common.dependency 'WLToolsKit/WLDate'
+    common.dependency 'WLToolsKit/Date'
   end
-  spec.subspec 'WLColor' do |color|
+  spec.subspec 'Color' do |color|
     
     color.source_files = "Code/Color/*.{swift}"
-    color.dependency 'WLToolsKit/WLString'
+    color.dependency 'WLToolsKit/String'
   end
-  spec.subspec 'WLImage' do |image|
+  spec.subspec 'Image' do |image|
     
     image.source_files = "Code/Image/*.{swift}"
-    image.dependency 'WLToolsKit/WLColor'
-    image.dependency 'WLToolsKit/WLCommon'
+    image.dependency 'WLToolsKit/Color'
+    image.dependency 'WLToolsKit/Common'
   end
   
-  spec.subspec 'WLNaviBar' do |bar|
+  spec.subspec 'NaviBar' do |bar|
     
     bar.source_files = "Code/NaviBar/*.{swift}"
-    
   end
-  spec.subspec 'WLJsonCast' do |cast|
+  spec.subspec 'JsonCast' do |cast|
     
     cast.source_files = "Code/JsonCast/*.{swift}"
-    
   end
   
-  spec.subspec 'WLAppStore' do |store|
+  spec.subspec 'AppStore' do |store|
     
     store.source_files = "Code/AppStore/*.{swift}"
-    store.dependency 'WLToolsKit/WLOpenUrl'
+    store.dependency 'WLToolsKit/OpenUrl'
   end
-  spec.subspec 'WLDate' do |date|
+  spec.subspec 'Date' do |date|
     
     date.source_files = "Code/Date/*.{swift}"
     
   end
-  spec.subspec 'WLDeviceInfo' do |info|
+  spec.subspec 'DeviceInfo' do |info|
     
     info.source_files = "Code/DeviceInfo/*.{swift}"
-    info.dependency 'WLToolsKit/WLCommon'
+    info.dependency 'WLToolsKit/Common'
   end
-  spec.subspec 'WLOpenUrl' do |open|
+  spec.subspec 'OpenUrl' do |open|
     
     open.source_files = "Code/OpenUrl/*.{swift}"
-    
   end
-  spec.subspec 'WLThen' do |th|
+  spec.subspec 'Then' do |th|
     
     th.source_files = "Code/Then/*.{swift}"
-    
   end
-  spec.subspec 'WLSwizzling' do |swizzle|
+  spec.subspec 'Swizzling' do |swizzle|
     
     swizzle.source_files = "Code/Swizzling/*.{swift}"
-    
   end
 end
 
