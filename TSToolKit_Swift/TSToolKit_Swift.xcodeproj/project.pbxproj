@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C0032A222BC8A4E00457914 /* String+Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0032A122BC8A4E00457914 /* String+Secret.swift */; };
 		6C7EBC93219B1E2300B093BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBC92219B1E2300B093BA /* AppDelegate.swift */; };
 		6C7EBC95219B1E2300B093BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7EBC94219B1E2300B093BA /* ViewController.swift */; };
 		6C7EBC98219B1E2300B093BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C7EBC96219B1E2300B093BA /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C0032A122BC8A4E00457914 /* String+Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Secret.swift"; sourceTree = "<group>"; };
 		6C7EBC8F219B1E2300B093BA /* TSToolKit_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TSToolKit_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C7EBC92219B1E2300B093BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C7EBC94219B1E2300B093BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				6CC5F259226039BA0078D135 /* String+Util.swift */,
+				6C0032A122BC8A4E00457914 /* String+Secret.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				6C7EBC95219B1E2300B093BA /* ViewController.swift in Sources */,
 				6CC5F263226039BA0078D135 /* Load+Swizzling.swift in Sources */,
 				6CC5F264226039BA0078D135 /* WLOpenUrl.swift in Sources */,
+				6C0032A222BC8A4E00457914 /* String+Secret.swift in Sources */,
 				6C7EBC93219B1E2300B093BA /* AppDelegate.swift in Sources */,
 				6CC5F262226039BA0078D135 /* WLCommon.swift in Sources */,
 				6CC5F25A226039BA0078D135 /* UINavigationBar+Util.swift in Sources */,
@@ -589,9 +593,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4F5DLT74B2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TSToolKit_Swift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,9 +612,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4F5DLT74B2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TSToolKit_Swift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
