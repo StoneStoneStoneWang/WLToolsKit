@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "WLToolsKit"
-  spec.version      = "1.3.3"
+  spec.version      = "1.3.4"
   spec.summary      = "A Lib For Tool."
   spec.description  = <<-DESC
   WLToolKit是一个综合类的工具类。 字符串、颜色 图片等 Load+Swizzling
